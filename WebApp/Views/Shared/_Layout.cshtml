@@ -28,9 +28,13 @@
             </div>
         </nav>
     </header>
-
     <div class="container">
-        @RenderBody()
+        <div class="pb-3">
+            @RenderSection("title")
+        </div>
+        <div>
+            @RenderBody()
+        </div>
     </div>
 </body>
 </html>
