@@ -1,11 +1,11 @@
 
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+app.UseStaticFiles();
 
 //1.Routingi ayarlama
 app.UseRouting();
