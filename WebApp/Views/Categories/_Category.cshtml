@@ -1,0 +1,54 @@
+﻿@model Category
+@{
+    //View'den belirttiğimiz Action methodunu yakalar.
+    //Bu form hem edit hem de add işlemi yapacak.
+    //2 farklı View'de aynı formu kullanmak için, ViewBag ile partialView'den gelen Action methodunu yakalıyoruz.
+    string action = ViewBag.Action ?? string.Empty;
+}
+
+<form method="post" asp-controller="categories" asp-action="@action">
+    @{
+        //Kullanıcıya id'yi göstermemek için hidden input olusturuldu.
+            //Id'yi sadece edit işlemi yaparken göstermek istiyoruz.
+    }
+    @if(action?.ToLower() == "edit")
+    {
+        <input type="hidden" asp-for="CategoryId" />
+    }
+    @{
+        //Formda hata mesajı gösterme.(ALL)
+    }
+    <div class="text-danger" asp-validation-summary="All"></div>
+    <div class="row mb-3">
+        <div class="col-2">
+            <label asp-for="Name" class="col-form-label"></label>
+        </div>
+        <div class="col-6">
+            <input type="text" asp-for="Name" class="form-control" />
+        </div>
+
+        @{
+            //İlgili alana özel hata mesajı gösterme.
+        }
+        <div class="col">
+            <span class="text-danger" asp-validation-for="Name">
+
+            </span>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-2">
+            <label asp-for="Description" class="col-form-label"></label>
+        </div>
+        <div class="col-6">
+            <input type="text" asp-for="Description" class="form-control" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-2">
+            <input type="submit" class="btn btn-primary" value="Save" />
+        </div>
+        <div class="col-6">
+        </div>
+    </div>
+</form>

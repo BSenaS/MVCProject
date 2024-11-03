@@ -19,45 +19,4 @@
     //Kategorileri editlemek için form ögesi olusturma.
 }
 
-<form method="post" asp-controller="categories" asp-action="edit">
-    @{
-        //Kullanıcıya id'yi göstermemek için hidden input olusturuldu.
-    }
-    <input type="hidden" asp-for="CategoryId" />
-    @{
-        //Formda hata mesajı gösterme.(ALL)
-    }
-    <div class="text-danger" asp-validation-summary="All"></div>
-    <div class="row mb-3">
-       <div class="col-2">
-           <label asp-for="Name" class="col-form-label"></label>
-       </div>
-       <div class="col-6">
-           <input type="text" asp-for="Name" class="form-control"/>
-       </div>
-       
-       @{
-       //İlgili alana özel hata mesajı gösterme.
-       }
-       <div class="col">
-            <span class="text-danger" asp-validation-for="Name">
-
-            </span>
-       </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-2">
-            <label asp-for="Description" class="col-form-label"></label>
-        </div>
-        <div class="col-6">
-            <input type="text" asp-for="Description" class="form-control" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-2">
-            <input type="submit" class="btn btn-primary" value="Save" />
-        </div>
-        <div class="col-6">
-        </div>
-    </div>
-</form>
+<partial name="_Category" model="@Model" />
