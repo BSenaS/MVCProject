@@ -35,6 +35,13 @@
         <div>
             @RenderBody()
         </div>
+        @{
+            // Tam RenderBody'nin altın da Script'i runlamamızın sebebi performansı arttırmak.
+            // Sayfa yüklendiğinde Script'lerin çalışması için sayfanın tamamının yüklenmesini beklememek için.
+            // Required: false -> Eğer Script Section'ı yoksa hata verme.
+            //Async -> Asenkron çalıştırma
+        }
+        @await RenderSectionAsync("Scripts", required: false)
     </div>
 </body>
 </html>
