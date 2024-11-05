@@ -29,9 +29,7 @@ namespace WebApp.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(category);
-
-            
+            return View(category);   
         }
 
         public IActionResult Add()
