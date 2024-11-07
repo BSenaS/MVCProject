@@ -62,6 +62,8 @@
                 {
                     prod.Category = CategoriesRepository.GetCategoryById(prod.CategoryId.Value);
                 }
+
+                return prod;
             }
             return null;
         }

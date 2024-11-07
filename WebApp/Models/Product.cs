@@ -15,6 +15,7 @@ namespace WebApp.Models
         public string Name { get; set; } = string.Empty;
 
         [Required]
+        [Range(1,100)]
         public int Quantity { get; set; }
 
         [Required]

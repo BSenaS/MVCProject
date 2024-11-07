@@ -26,6 +26,9 @@
                     <td>@product.Name</td>
                     <td>@product.Price</td>
                     <td>@product.Quantity</td>
+                    <td>
+                        <a class="btn btn-link" asp-controller="products" asp-action="edit" asp-route-id="@product.ProductId">Edit</a>
+                    </td>
                 </tr>
             }
         </tbody>
