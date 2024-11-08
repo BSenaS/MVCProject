@@ -72,5 +72,13 @@ namespace WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        //Sales sayfasın da, ilgili kategori seçimi yapıldığın da PartialView ile sayfa yüklenmeden ilgili componenti renderlarma
+        //Fonksiyonun sonuna Partial yazılırsa, bu fonksiyonu Özel bir fonksiyon yapar, Bize artık normal bir View dönmez onun yerine PartialView döner.
+        public IActionResult ProductsByCategoryPartial(int categoryId)
+        {
+            var products = ProductsRepository.GetProductsByCategoryId(categoryId);
+            return PartialView("_Products", products);
+        }
+
     }
 }
