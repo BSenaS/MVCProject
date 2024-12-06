@@ -1,0 +1,12 @@
+﻿/*
+    Boostrap olduğu için bazen aşağıdaki gibi yapmak yeterli olamayabilir.
+    Boostrapten daha spesifik olmamız gerekirki, bizim cssimiz çalışsın (overridelasın).
+
+    .highlight {
+        background-color: yellow;
+    }
+*/
+
+tr.highlight > td {
+    background-color: yellow;
+}

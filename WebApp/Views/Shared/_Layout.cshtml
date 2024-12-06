@@ -4,7 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Supermarket Management</title>
+    @*
+        Burada asp-append-version="true" ile css dosyalarının versiyonlarını güncellemiş oluyoruz.
+        Bu sayede, css dosyaları güncellendiğinde, tarayıcı cache'ini temizlememize gerek kalmıyor.
+        Bu sayede, güncel css dosyalarını kullanmış oluyor
+    *@
     <link rel="stylesheet" href="~/lib/boostrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/css/site.css" asp-append-version="true" />
 
 </head>
 <body>

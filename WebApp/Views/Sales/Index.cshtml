@@ -62,6 +62,21 @@
             $("#SelectedCategoryId").on("change",function() {
                 $("#productsPartial").load("/products/ProductsByCategoryPartial", { categoryId: $(this).val() });
             })
+
+            // Handle product selection (Highlight?)
+            //User productsPartial içerisinde bir row'a tıkladıgında, o row'u highlight et.
+            $("#productsPartial").on("click", ".product-row", function () {
+                //Highlit the row selected.
+                //Öncelikle yeni bir row'a tıklandığın da, önceki highlightlanan rowun highlightını kaldırmamız gerekiyor.
+                $(".product-row").removeClass("highlight");
+
+                //Seçili rowa highlight ekleme.
+                $(this).addClass("highlight");
+                console.log("Row selected", $(this).text());
+            });
         })
+
+
+
     </script>
 }

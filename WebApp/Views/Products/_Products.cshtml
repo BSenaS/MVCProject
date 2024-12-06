@@ -14,7 +14,8 @@
         <tbody>
             @foreach(var product in Model)
             {
-                <tr>
+                //row'a product-row class ismini vererek, ilgili isimden sonra click event'i tanımlanabilir.
+                <tr class="product-row">
                     <td>@product.Name</td>
                     <td>@product.Quantity</td>
                 </tr>
