@@ -33,7 +33,7 @@
             }
         </select>
         <br />
-        <div>
+        <div id="productsPartial">
             @*Product List*@
         </div>
         <div>
@@ -44,6 +44,24 @@
     <div class="col">
         @*List of transactions*@
     </div>
-
-
 </div>
+
+@{
+    
+}
+@section Scripts {
+    @*
+        //Select elementin de bir değişiklik oldugun da, SelectedCategoryId güncellenir.
+        //Güncellenen SelectedCategoryId ile ProductsByCategoryPartial action methodu çalıştırılır.
+        //ProductsByCategoryPartial action methodu çalıştırıldıgında, ProductsPartial view'i güncellenir.
+        //this.val ile select elementin de seçilen option'ın value'su alınır.
+    *@
+    <script>
+        $(function () {
+            //Handle category selection
+            $("#SelectedCategoryId").on("change",function() {
+                $("#productsPartial").load("/products/ProductsByCategoryPartial", { categoryId: $(this).val() });
+            })
+        })
+    </script>
+}

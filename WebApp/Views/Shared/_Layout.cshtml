@@ -1,11 +1,11 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
+<head>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Supermarket Management</title>
     <link rel="stylesheet" href="~/lib/boostrap/css/bootstrap.css" />
-    
+
 </head>
 <body>
     <header>
@@ -20,14 +20,14 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" href="/home/index">Home</a>
                         </li>
+                        <li>
+                            <a class="nav-link text-dark" href="/sales/index">Sell</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" href="/categories/index">Categories</a>
                         </li>
                         <li>
                             <a class="nav-link text-dark" href="/products/index">Products</a>
-                        </li>
-                        <li>
-                            <a class="nav-link text-dark" href="/sales/index">Sales</a>
                         </li>
                     </ul>
                 </div>
@@ -41,6 +41,15 @@
         <div>
             @RenderBody()
         </div>
+
+        @{
+            //JQUERY CDN LINK EKLEME
+        }
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+                crossorigin="anonymous"></script>
+
         @{
             // Tam RenderBody'nin altın da Script'i runlamamızın sebebi performansı arttırmak.
             // Sayfa yüklendiğinde Script'lerin çalışması için sayfanın tamamının yüklenmesini beklememek için.
