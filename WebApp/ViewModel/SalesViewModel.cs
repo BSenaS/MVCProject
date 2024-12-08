@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using WebApp.Models;
+using WebApp.ViewModel.Validations;
 
 namespace WebApp.ViewModel
 {
@@ -11,8 +12,8 @@ namespace WebApp.ViewModel
         public int SelectedProductId { get; set; }
 
         [Display(Name = "Quantity")]
-        [Required]
         [Range(1, int.MaxValue)]
+        [SalesViewModel_EnsureProperQuantity]
         public int QuantityToSell { get; set; }
     }
 }
