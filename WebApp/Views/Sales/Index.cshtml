@@ -34,12 +34,32 @@
         </select>
         <br />
         <div id="productsPartial">
-            @*Product List*@
+            @*Product List
+                -Category seçildiğinde, ProductsPartial view'i güncellenir. (_Products -> PartialView)
+            *@
         </div>
-        <div>
-            @*Product Details*@
+        <div id="productDetailPartial">
+            @*Product Details
+            -Product List içerisinden kullanıcı bir row'a tıkladıgında, o row'un detaylarını burada göster.
+            *@
         </div>
-        @*Sales form*@
+        @*Sales form
+            Kullanıcı bir ürün sattığın da, post işlemi.
+            Bu kısım sadece quantity ve hidden SelectedProductId'den oluşuyor.
+            Submit butonuna basıldıgın da, ilgili controllera seçilen Productın ID'si ve Satılan Miktar (Quantity gönderilir)
+        *@
+        <form method="post" asp-controller="sales" asp-action="sell" id="formSale">
+            <input asp-for="SelectedProductId" type="hidden"/>
+            <div class="form-group">
+                <label asp-for="QuantityToSell"></label>
+                <input asp-for="QuantityToSell" class="form-control" type="number" min="1"/>
+                <br />
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Submit"/>
+                </div>
+            </div>
+        </form>
+
     </div>
     <div class="col">
         @*List of transactions*@
@@ -58,9 +78,18 @@
     *@
     <script>
         $(function () {
+            //Initialize the form
+            $("#formSale").hide();
+            $("#QuantityToSell").val("");
+
             //Handle category selection
             $("#SelectedCategoryId").on("change",function() {
                 $("#productsPartial").load("/products/ProductsByCategoryPartial", { categoryId: $(this).val() });
+
+                //Kullanıcı categori değiştirdiğin de, seçili product details sayfasını resetle.
+                $("#productDetailPartial").html("");
+                //Categori değiştiğin de, formu gizle.
+                $("#formSale").hide();
             })
 
             // Handle product selection (Highlight?)
@@ -72,7 +101,26 @@
 
                 //Seçili rowa highlight ekleme.
                 $(this).addClass("highlight");
-                console.log("Row selected", $(this).text());
+
+                //Get the product id of the selected row. from "product-id" -> attribute. -> _Products Partial View
+                var productId = $(this).attr("product-id");
+
+                console.log("Row selected", "id: ", productId);
+
+                //Get the product details of the selected product. -> _SellProduct Partial View
+                $("#productDetailPartial").load("/sales/SellProductPartial", {productId: productId});
+                
+                //Formu gösterip, kapatma
+                if(productId > 0){
+                    $("#SelectedProductId").val(productId);
+                    $("#formSale").show();
+                    console.log("Product Id:", SelectedProductId);
+                }
+                else {
+                    $("#SelectedProductId").val("");
+                    $("formSale").hide();
+                }
+
             });
         })
 

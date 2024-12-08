@@ -15,7 +15,8 @@
             @foreach(var product in Model)
             {
                 //row'a product-row class ismini vererek, ilgili isimden sonra click event'i tanımlanabilir.
-                <tr class="product-row">
+                //Row'a product-id attribute'u ekleyerek, ilgili row'un product id'sini alabiliriz. (Sales Index sayfasın da, jQuery fonksiyonu için kullanılacak.)'
+                <tr class="product-row" product-id="@product.ProductId">
                     <td>@product.Name</td>
                     <td>@product.Quantity</td>
                 </tr>
