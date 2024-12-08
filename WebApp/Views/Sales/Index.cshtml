@@ -22,6 +22,7 @@
 <div class="row">
     <div class="col-4">
         @*Category Selection*@
+        <div class="text-danger" asp-validation-summary="All"></div>
         <select asp-for="SelectedCategoryId" class="form-control">
             <option>- Please Select -</option>
             @if (Model.Categories != null && Model.Categories.Count() > 0)
@@ -81,6 +82,12 @@
             //Initialize the form
             $("#formSale").hide();
             $("#QuantityToSell").val("");
+
+            //Eğer seçili bir CategoryId var ise sayfa yüklendiğin de, ilgili Productları getir.
+            var selectedCategoryId = $("#SelectedCategoryId").val();
+            if(selectedCategoryId > 0){
+                $("#productsPartial").load("/products/ProductsByCategoryPartial", { categoryId: selectedCategoryId });
+            }
 
             //Handle category selection
             $("#SelectedCategoryId").on("change",function() {
