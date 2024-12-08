@@ -27,6 +27,21 @@ namespace WebApp.Controllers
             if (ModelState.IsValid)
             {
                 //Sell the product.
+                var prod = ProductsRepository.GetProductById(salesViewModel.SelectedProductId);
+                if(prod != null)
+                {
+                    TransactionsRepository.Add(
+                     "Cashier1",
+                     salesViewModel.SelectedProductId,
+                     prod.Name,
+                     prod.Price,
+                     prod.Quantity,
+                     salesViewModel.QuantityToSell);
+
+                    //Satılan ürün kadar stoğu güncelleme
+                    prod.Quantity -= salesViewModel.QuantityToSell;
+                    ProductsRepository.UpdateProduct(salesViewModel.SelectedProductId, prod);
+                }
             }
             var product = ProductsRepository.GetProductById(salesViewModel.SelectedProductId);
             salesViewModel.SelectedCategoryId = (product?.CategoryId == null) ? 0 : product.CategoryId.Value;
