@@ -1,0 +1,87 @@
+﻿@model TransactionsViewModel
+
+@section title {
+    <h3>Transactions Report</h3>
+}
+
+<form method="post" asp-controller="transactions" asp-action="search" id="transactions">
+    <div class="row">
+        @* Cashier Name *@
+        <div class="col-2">
+            <label asp-for="CashierName"></label>
+            <input type="text" class="form-control" asp-for="CashierName" />
+        </div>
+
+        @* Start Date *@
+        <div class="col-3">
+            <label asp-for="StartDate"></label>
+            <input type="date" class="form-control" asp-for="StartDate" />
+        </div>
+
+        @* End Date *@
+        <div class="col-3">
+            <label asp-for="EndDate"></label>
+            <input type="date" class="form-control" asp-for="EndDate" />
+        </div>
+
+        @* Search Button *@
+        <div class="col-2">
+            <label>&nbsp;</label>
+            <button type="submit" class="btn btn-primary form-control">Search</button>
+        </div>
+
+        @* Print Button *@
+        <div class="col-2">
+
+        </div>
+    </div>
+</form>
+<br />
+
+@* Asagi da Controllerdan gelen Transaction Listi gösterilecek. *@
+
+@if (Model.Transactions != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date Time</th>
+                <th>Cashier Name</th>
+                <th>Product Name</th>
+                <th>Qty Before</th>
+                <th>Qty Sold</th>
+                <th>Qty After</th>
+                <th>Price</th>
+                <th>Sold Amt</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var tran in Model.Transactions)
+            {
+                <tr>
+                    <td>@tran.TimeStamp.ToString("yyyy-MM-dd hh:mm")</td>
+                    <td>@tran.CashierName</td>
+                    <td>@tran.ProductName</td>
+                    <td>@tran.BeforeQty</td>
+                    <td>@tran.SoldQty</td>
+                    <td>@(tran.BeforeQty - tran.SoldQty)</td>
+                    <td style="text-align:right">@(string.Format("{0:c}", tran.Price))</td>
+                    <td>@(string.Format("{0:c}", tran.SoldQty * tran.Price))</td> @* //Toplam satis tutari *@
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="6">&nbsp;</td>  @* //colspan="6" -> ilk 6 satırı bos bırak *@
+                <td style="text-align:right">
+                    <b>Grand Total:</b>
+                </td>
+                <td style="text-align:right">
+                    <b>
+                        @(string.Format("{0:c}", Model.Transactions.Sum(x => x.Price * x.SoldQty)))
+                    </b>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+}
