@@ -4,6 +4,7 @@
     <h3>Transactions Report</h3>
 }
 
+<div id="printarea">
 <form method="post" asp-controller="transactions" asp-action="search" id="transactions">
     <div class="row">
         @* Cashier Name *@
@@ -32,7 +33,8 @@
 
         @* Print Button *@
         <div class="col-2">
-
+            <label>&nbsp;</label>
+            <button id="print" type="button" class="btn btn-primary form-control">Print</button>
         </div>
     </div>
 </form>
@@ -84,4 +86,16 @@
             </tr>
         </tfoot>
     </table>
+}
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            //Handle print
+            $('#print').on('click', function () {
+                window.print();
+            });
+        });
+    </script>
 }
